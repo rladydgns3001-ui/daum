@@ -1,14 +1,1331 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html lang="ko">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Hello World</title>
-  <link href='/style.css' rel='stylesheet'>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>테크머니 - 기술이 만드는 새로운 경제</title>
+<meta name="description" content="테크머니는 IT와 경제의 교차점에서 핵심 인사이트를 전달합니다.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&family=Noto+Serif+KR:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #ffffff;
+  --bg2: #f7f7f9;
+  --bg3: #eeeef3;
+  --accent: #1a1a2e;
+  --accent2: #2d2d4e;
+  --text: #0f0f1a;
+  --text2: #555570;
+  --text3: #9999b0;
+  --border: #e0e0e8;
+  --red: #d63031;
+  --green: #00b894;
+  --serif: 'Noto Serif KR', serif;
+  --sans: 'Noto Sans KR', sans-serif;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: var(--sans);
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.7;
+  overflow-x: hidden;
+}
+
+/* SCROLLBAR */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: var(--bg2); }
+::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 2px; }
+
+/* HEADER */
+header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(255,255,255,0.97);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+}
+
+.header-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 2rem;
+  height: 64px;
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.logo-icon {
+  width: 36px;
+  height: 36px;
+  background: var(--accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 900;
+  font-size: 14px;
+  color: #fff;
+  letter-spacing: -1px;
+}
+
+.logo-text {
+  font-size: 22px;
+  font-weight: 900;
+  color: var(--text);
+  letter-spacing: -1px;
+}
+
+.logo-text span { color: var(--accent); }
+
+nav {
+  display: flex;
+  gap: 2rem;
+}
+
+nav a {
+  color: var(--text2);
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 500;
+  transition: color 0.2s;
+  cursor: pointer;
+}
+
+nav a:hover, nav a.active { color: var(--accent); }
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.date-tag {
+  font-size: 12px;
+  color: var(--text2);
+}
+
+/* TICKER */
+.ticker-bar {
+  background: var(--accent);
+  border-bottom: 1px solid var(--border);
+  padding: 0 2rem;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  overflow: hidden;
+}
+
+.ticker-label {
+  font-size: 11px;
+  font-weight: 700;
+  color: rgba(255,255,255,0.6);
+  letter-spacing: 1px;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.ticker-items {
+  display: flex;
+  gap: 2.5rem;
+  animation: ticker 30s linear infinite;
+  white-space: nowrap;
+}
+
+.ticker-item {
+  font-size: 12px;
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+
+.ticker-item .name { color: rgba(255,255,255,0.7); }
+.ticker-item .price { color: #fff; font-weight: 600; }
+.ticker-item .change.up { color: #a8ffcc; }
+.ticker-item .change.down { color: #ffaaaa; }
+
+@keyframes ticker {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* MAIN LAYOUT */
+.page { display: none; }
+.page.active { display: block; }
+
+.container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+/* HERO */
+.hero {
+  padding: 3rem 0 2rem;
+}
+
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1fr 380px;
+  gap: 2px;
+  background: var(--border);
+}
+
+.hero-main {
+  background: var(--bg);
+  padding: 2.5rem;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: background 0.3s;
+}
+
+.hero-main::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(232,184,75,0.03) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+.hero-main:hover { background: var(--bg2); }
+
+.hero-tag {
+  display: inline-block;
+  background: var(--accent);
+  color: #fff;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 3px 10px;
+  letter-spacing: 1px;
+  margin-bottom: 1.2rem;
+}
+
+.hero-title {
+  font-family: var(--serif);
+  font-size: 2.2rem;
+  font-weight: 700;
+  line-height: 1.35;
+  margin-bottom: 1rem;
+  color: var(--text);
+}
+
+.hero-title:hover { color: var(--accent2); }
+
+.hero-sub {
+  font-size: 1rem;
+  color: var(--text2);
+  line-height: 1.8;
+  margin-bottom: 1.5rem;
+  max-width: 580px;
+}
+
+.hero-meta {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  font-size: 13px;
+  color: var(--text2);
+}
+
+.hero-author { color: var(--accent); font-weight: 600; }
+
+.hero-side {
+  background: var(--bg);
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.side-article {
+  background: var(--bg);
+  padding: 1.5rem;
+  cursor: pointer;
+  transition: background 0.2s;
+  flex: 1;
+}
+
+.side-article:hover { background: var(--bg2); }
+
+.side-tag {
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--accent);
+  letter-spacing: 1px;
+  margin-bottom: 0.6rem;
+  text-transform: uppercase;
+}
+
+.side-title {
+  font-family: var(--serif);
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1.5;
+  margin-bottom: 0.5rem;
+  color: var(--text);
+}
+
+.side-date {
+  font-size: 12px;
+  color: var(--text2);
+}
+
+/* SECTION DIVIDER */
+.section-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 2.5rem 0 1.5rem;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 1.5rem;
+}
+
+.section-title {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  color: var(--accent);
+  text-transform: uppercase;
+}
+
+.section-line {
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+}
+
+/* ARTICLE GRID */
+.article-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2px;
+  background: var(--border);
+  margin-bottom: 2px;
+}
+
+.article-card {
+  background: var(--bg);
+  padding: 1.8rem;
+  cursor: pointer;
+  transition: background 0.2s;
+  position: relative;
+}
+
+.article-card:hover { background: var(--bg2); }
+
+.card-tag {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  color: var(--accent);
+  text-transform: uppercase;
+  margin-bottom: 0.7rem;
+}
+
+.card-title {
+  font-family: var(--serif);
+  font-size: 1.08rem;
+  font-weight: 600;
+  line-height: 1.55;
+  margin-bottom: 0.8rem;
+  color: var(--text);
+}
+
+.card-excerpt {
+  font-size: 0.88rem;
+  color: var(--text2);
+  line-height: 1.7;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  margin-bottom: 1rem;
+}
+
+.card-meta {
+  font-size: 12px;
+  color: #555570;
+  display: flex;
+  gap: 1rem;
+}
+
+.card-meta .author { color: var(--accent); font-weight: 600; }
+
+/* ARTICLE PAGE */
+.article-page {
+  max-width: 780px;
+  margin: 0 auto;
+  padding: 3rem 2rem;
+}
+
+.back-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  color: var(--text2);
+  cursor: pointer;
+  margin-bottom: 2.5rem;
+  transition: color 0.2s;
+}
+
+.back-btn:hover { color: var(--accent); }
+
+.article-tag-bar {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1.2rem;
+  flex-wrap: wrap;
+}
+
+.atag {
+  font-size: 11px;
+  font-weight: 700;
+  color: #fff;
+  background: var(--accent);
+  padding: 3px 10px;
+  letter-spacing: 0.5px;
+}
+
+.atag.secondary {
+  background: transparent;
+  color: var(--accent);
+  border: 1px solid var(--accent);
+}
+
+.article-h1 {
+  font-family: var(--serif);
+  font-size: 2rem;
+  font-weight: 700;
+  line-height: 1.4;
+  margin-bottom: 1rem;
+  color: var(--text);
+}
+
+.article-lead {
+  font-size: 1.05rem;
+  color: var(--text2);
+  line-height: 1.85;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.article-meta-bar {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  padding-bottom: 2rem;
+  margin-bottom: 2rem;
+  border-bottom: 1px solid var(--border);
+  font-size: 13px;
+  color: var(--text2);
+}
+
+.article-meta-bar .author { color: var(--accent); font-weight: 700; font-size: 14px; }
+
+.article-body {
+  font-size: 1rem;
+  line-height: 1.95;
+  color: #2a2a3e;
+}
+
+.article-body h2 {
+  font-family: var(--serif);
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--text);
+  margin: 2.5rem 0 1rem;
+  padding-left: 1rem;
+  border-left: 3px solid var(--accent);
+}
+
+.article-body p {
+  margin-bottom: 1.4rem;
+}
+
+.article-body blockquote {
+  background: var(--bg2);
+  border-left: 3px solid var(--accent);
+  padding: 1.2rem 1.5rem;
+  margin: 2rem 0;
+  font-style: italic;
+  color: var(--text2);
+  font-size: 0.95rem;
+}
+
+.article-body .highlight-box {
+  background: #f0f0f8;
+  border: 1px solid #d0d0e8;
+  border-left: 3px solid var(--accent);
+  padding: 1.5rem;
+  margin: 2rem 0;
+}
+
+.article-body .highlight-box strong {
+  color: var(--accent);
+  display: block;
+  margin-bottom: 0.5rem;
+  font-size: 13px;
+  letter-spacing: 1px;
+}
+
+.article-body ul {
+  padding-left: 1.5rem;
+  margin-bottom: 1.4rem;
+}
+
+.article-body ul li {
+  margin-bottom: 0.6rem;
+  color: #2a2a3e;
+}
+
+.data-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: var(--border);
+  margin: 2rem 0;
+}
+
+.data-cell {
+  background: var(--bg2);
+  padding: 1.2rem;
+  text-align: center;
+}
+
+.data-cell .num {
+  font-size: 1.8rem;
+  font-weight: 900;
+  color: var(--accent);
+  font-family: var(--serif);
+  line-height: 1;
+  margin-bottom: 0.3rem;
+}
+
+.data-cell .label {
+  font-size: 12px;
+  color: var(--text2);
+}
+
+/* FOOTER */
+footer {
+  margin-top: 4rem;
+  background: var(--bg2);
+  border-top: 1px solid var(--border);
+  padding: 3rem 2rem;
+}
+
+.footer-inner {
+  max-width: 1280px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  gap: 3rem;
+}
+
+.footer-brand .logo-text { font-size: 18px; }
+
+.footer-brand p {
+  font-size: 13px;
+  color: var(--text2);
+  margin-top: 0.8rem;
+  line-height: 1.7;
+}
+
+.footer-col h4 {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  color: var(--accent);
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+}
+
+.footer-col a {
+  display: block;
+  font-size: 13px;
+  color: var(--text2);
+  text-decoration: none;
+  margin-bottom: 0.5rem;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.footer-col a:hover { color: var(--text); }
+
+.footer-bottom {
+  max-width: 1280px;
+  margin: 2rem auto 0;
+  padding-top: 2rem;
+  border-top: 1px solid var(--border);
+  font-size: 12px;
+  color: var(--text2);
+  display: flex;
+  justify-content: space-between;
+}
+
+/* RESPONSIVE */
+@media (max-width: 900px) {
+  .hero-grid { grid-template-columns: 1fr; }
+  .hero-side { flex-direction: row; overflow-x: auto; }
+  .side-article { min-width: 260px; }
+  .article-grid { grid-template-columns: 1fr; }
+  nav { display: none; }
+  .data-row { grid-template-columns: 1fr; }
+  .footer-inner { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 600px) {
+  .hero-title { font-size: 1.5rem; }
+  .article-h1 { font-size: 1.5rem; }
+}
+
+/* FADE IN */
+.fade-in {
+  animation: fadeIn 0.4s ease forwards;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.number-badge {
+  font-size: 3rem;
+  font-weight: 900;
+  color: rgba(26,26,46,0.06);
+  font-family: var(--serif);
+  position: absolute;
+  bottom: 1rem;
+  right: 1.5rem;
+  line-height: 1;
+  pointer-events: none;
+}
+</style>
 </head>
 <body>
-  <h1>Hello, world!</h1>
-  <button onclick="console.log('hello');">Press me</button>
-  <script defer type="text/javascript" src="/main.js"></script>
+
+<header>
+  <div class="header-top">
+    <a class="logo" onclick="showPage('home')">
+      <div class="logo-icon">TM</div>
+      <span class="logo-text">테크<span>머니</span></span>
+    </a>
+    <nav>
+      <a onclick="filterCategory('전체')" class="active" id="nav-all">전체</a>
+      <a onclick="filterCategory('경제')" id="nav-economy">경제</a>
+      <a onclick="filterCategory('IT·테크')" id="nav-tech">IT·테크</a>
+      <a onclick="filterCategory('투자')" id="nav-invest">투자</a>
+      <a onclick="filterCategory('스타트업')" id="nav-startup">스타트업</a>
+    </nav>
+    <div class="header-right">
+      <span class="date-tag" id="today-date"></span>
+    </div>
+  </div>
+</header>
+
+<div class="ticker-bar">
+  <span class="ticker-label">MARKET</span>
+  <div class="ticker-items" id="ticker">
+    <span class="ticker-item"><span class="name">로딩 중...</span></span>
+  </div>
+</div>
+
+<!-- HOME PAGE -->
+<div class="page active fade-in" id="page-home">
+  <div class="container">
+    <div class="hero">
+      <div class="hero-grid">
+        <div class="hero-main" onclick="showArticle(0)">
+          <span class="hero-tag">AI · 반도체</span>
+          <h1 class="hero-title">AI 반도체 전쟁 2025: 삼성·SK하이닉스가<br>엔비디아를 잡을 수 있을까</h1>
+          <p class="hero-sub">HBM3E 양산 경쟁이 본격화되면서 국내 반도체 기업들의 글로벌 시장 장악력이 어느 때보다 커지고 있다. 하지만 TSMC의 패키징 기술과 엔비디아의 소프트웨어 생태계라는 벽은 여전히 높다.</p>
+          <div class="hero-meta">
+            <span class="hero-author">김준혁 기자</span>
+            <span>2025.03.04</span>
+            <span>읽는 시간 7분</span>
+          </div>
+        </div>
+        <div class="hero-side">
+          <div class="side-article" onclick="showArticle(1)">
+            <div class="side-tag">투자 · 금리</div>
+            <div class="side-title">금리 인하 사이클 본격화, 테크주 투자 전략 다시 짜야 할 때</div>
+            <div class="side-date">2025.03.03</div>
+          </div>
+          <div class="side-article" onclick="showArticle(2)">
+            <div class="side-tag">스타트업</div>
+            <div class="side-title">2025년 한국 스타트업 투자 현황: 빙하기 끝나나</div>
+            <div class="side-date">2025.03.02</div>
+          </div>
+          <div class="side-article" onclick="showArticle(3)">
+            <div class="side-tag">핀테크</div>
+            <div class="side-title">토스·카카오페이가 그리는 금융의 미래, 은행은 살아남을 수 있나</div>
+            <div class="side-date">2025.03.01</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section-header">
+      <span class="section-title">최신 기사</span>
+      <div class="section-line"></div>
+    </div>
+
+    <div class="article-grid" id="article-grid">
+      <!-- Cards injected by JS -->
+    </div>
+  </div>
+</div>
+
+<!-- ARTICLE PAGE -->
+<div class="page" id="page-article">
+  <div class="article-page fade-in" id="article-content">
+  </div>
+</div>
+
+<!-- ABOUT PAGE -->
+<div class="page" id="page-about">
+  <div class="article-page fade-in">
+    <div class="back-btn" onclick="showPage('home')">← 홈으로</div>
+    <div class="article-tag-bar"><span class="atag">소개</span></div>
+    <h1 class="article-h1">테크머니 소개</h1>
+    <p class="article-lead">테크머니는 IT와 경제의 교차점에서 핵심 인사이트를 전달하는 전문 디지털 미디어입니다. 복잡한 기술 트렌드와 경제 흐름을 누구나 이해할 수 있는 언어로 분석합니다.</p>
+    <div class="article-body">
+      <h2>미디어 소개</h2>
+      <p>테크머니는 AI·반도체, 클라우드, 핀테크, 스타트업 투자, 가상자산 등 기술이 만드는 새로운 경제 흐름을 빠르고 깊이 있게 다룹니다. 단순 뉴스 전달이 아닌, 배경과 맥락을 짚는 심층 분석 콘텐츠를 지향합니다.</p>
+      <h2>편집 방향</h2>
+      <p>테크머니는 다음의 원칙으로 콘텐츠를 제작합니다.</p>
+      <ul>
+        <li><strong>정확성</strong> — 검증된 데이터와 공신력 있는 출처를 바탕으로 작성합니다.</li>
+        <li><strong>독립성</strong> — 광고·협찬 여부와 관계없이 독립적인 시각으로 분석합니다.</li>
+        <li><strong>접근성</strong> — 전문 지식 없이도 이해할 수 있도록 풀어 씁니다.</li>
+        <li><strong>신속성</strong> — 주요 경제·기술 이슈를 빠르게 포착해 전달합니다.</li>
+      </ul>
+      <h2>다루는 분야</h2>
+      <ul>
+        <li>AI · 반도체 · 클라우드</li>
+        <li>핀테크 · 가상자산 · 투자</li>
+        <li>스타트업 · 벤처 생태계</li>
+        <li>국내외 경제 · 산업 정책</li>
+        <li>전기차 · 모빌리티 · 딥테크</li>
+      </ul>
+      <h2>문의</h2>
+      <p>광고, 제휴, 제보, 기타 문의는 아래 이메일로 연락 주세요.</p>
+      <div class="highlight-box">
+        <strong>CONTACT</strong>
+        이메일: contact@techmoney.kr<br>
+        광고 문의: ad@techmoney.kr
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PRIVACY PAGE -->
+<div class="page" id="page-privacy">
+  <div class="article-page fade-in">
+    <div class="back-btn" onclick="showPage('home')">← 홈으로</div>
+    <div class="article-tag-bar"><span class="atag">개인정보처리방침</span></div>
+    <h1 class="article-h1">개인정보처리방침</h1>
+    <p class="article-lead">테크머니(이하 "회사")는 이용자의 개인정보를 소중히 여기며, 「개인정보 보호법」 및 관련 법령을 준수합니다. 본 방침은 회사가 수집하는 개인정보의 항목, 수집 목적, 보유 기간 등을 안내합니다.</p>
+    <div class="article-body">
+      <h2>제1조 수집하는 개인정보 항목 및 수집 방법</h2>
+      <p>회사는 현재 별도의 회원가입 절차를 운영하지 않으며, 서비스 이용 과정에서 아래와 같은 정보가 자동으로 수집될 수 있습니다.</p>
+      <ul>
+        <li>IP 주소, 접속 브라우저 및 기기 정보</li>
+        <li>방문 일시, 이용한 서비스 및 콘텐츠</li>
+        <li>문의 이메일 발송 시 이메일 주소 및 문의 내용</li>
+      </ul>
+      <h2>제2조 개인정보 수집 및 이용 목적</h2>
+      <ul>
+        <li>서비스 운영 및 이용 통계 분석</li>
+        <li>서비스 개선 및 신규 콘텐츠 기획</li>
+        <li>이용자 문의 응대</li>
+        <li>법령상 의무 이행</li>
+      </ul>
+      <h2>제3조 개인정보 보유 및 이용 기간</h2>
+      <p>회사는 개인정보 수집 및 이용 목적이 달성된 후에는 해당 정보를 지체 없이 파기합니다. 단, 관계 법령에 따라 보존할 필요가 있는 경우 해당 법령에서 정한 기간 동안 보관합니다.</p>
+      <ul>
+        <li>전자상거래 기록: 5년 (전자상거래법)</li>
+        <li>접속 로그 기록: 3개월 (통신비밀보호법)</li>
+      </ul>
+      <h2>제4조 개인정보의 제3자 제공</h2>
+      <p>회사는 원칙적으로 이용자의 개인정보를 외부에 제공하지 않습니다. 다만 법령에 의거하거나 수사기관의 요청이 있는 경우 예외적으로 제공할 수 있습니다.</p>
+      <h2>제5조 쿠키(Cookie) 운용</h2>
+      <p>회사는 서비스 이용 편의를 위해 쿠키를 사용할 수 있습니다. 이용자는 브라우저 설정을 통해 쿠키 저장을 거부할 수 있으며, 이 경우 일부 서비스 이용이 제한될 수 있습니다.</p>
+      <h2>제6조 개인정보 보호책임자</h2>
+      <div class="highlight-box">
+        <strong>개인정보 보호 담당</strong>
+        이메일: contact@techmoney.kr<br>
+        이용자는 개인정보 열람, 수정, 삭제를 요청할 수 있으며, 회사는 지체 없이 조치합니다.
+      </div>
+      <h2>제7조 개인정보처리방침 변경</h2>
+      <p>본 방침은 2025년 3월 4일부터 시행됩니다. 법령 또는 서비스 변경에 따라 내용이 수정될 수 있으며, 변경 시 홈페이지 공지를 통해 안내합니다.</p>
+    </div>
+  </div>
+</div>
+
+<!-- CONTACT PAGE -->
+<div class="page" id="page-contact">
+  <div class="article-page fade-in">
+    <div class="back-btn" onclick="showPage('home')">← 홈으로</div>
+    <div class="article-tag-bar"><span class="atag">문의</span></div>
+    <h1 class="article-h1">광고 · 제보 문의</h1>
+    <p class="article-lead">광고 제휴, 콘텐츠 협업, 제보 등 다양한 문의를 환영합니다. 아래 이메일로 연락 주시면 빠르게 답변드리겠습니다.</p>
+    <div class="article-body">
+      <h2>광고 문의</h2>
+      <p>테크머니는 경제·IT 분야에 관심 있는 독자를 대상으로 광고 및 스폰서 콘텐츠 기회를 제공합니다. 배너 광고, 네이티브 광고, 브랜드 콘텐츠 등 다양한 형태로 협업 가능합니다.</p>
+      <div class="highlight-box">
+        <strong>광고 문의</strong>
+        ad@techmoney.kr
+      </div>
+      <h2>제보 · 기사 제안</h2>
+      <p>경제·IT 분야의 제보, 보도자료, 기사 제안을 환영합니다. 독자 여러분의 제보가 더 나은 콘텐츠를 만듭니다.</p>
+      <div class="highlight-box">
+        <strong>제보 및 일반 문의</strong>
+        contact@techmoney.kr
+      </div>
+      <h2>정정 보도 요청</h2>
+      <p>기사 내용 중 사실과 다른 내용이 있거나 정정·반론 보도를 요청하실 경우 동일 이메일로 연락 주세요. 확인 후 신속하게 조치하겠습니다.</p>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <div class="logo-text" style="font-size:20px; font-weight:900">테크<span style="color:var(--accent)">머니</span></div>
+      <p>테크머니는 IT와 경제의 교차점에서<br>핵심 인사이트를 전달하는 전문 미디어입니다.<br>복잡한 기술과 경제 트렌드를 쉽고 깊이 있게 분석합니다.</p>
+    </div>
+    <div class="footer-col">
+      <h4>카테고리</h4>
+      <a onclick="filterCategory('경제')">경제</a>
+      <a onclick="filterCategory('IT·테크')">IT·테크</a>
+      <a onclick="filterCategory('투자')">투자</a>
+      <a onclick="filterCategory('스타트업')">스타트업</a>
+    </div>
+    <div class="footer-col">
+      <h4>테크머니</h4>
+      <a onclick="showPage('about')">소개</a>
+      <a onclick="showPage('contact')">광고 문의</a>
+      <a onclick="showPage('contact')">제보하기</a>
+      <a onclick="showPage('privacy')">개인정보처리방침</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 테크머니. All rights reserved.</span>
+    <span>contact@techmoney.kr</span>
+  </div>
+</footer>
+
+<script>
+// DATE
+document.getElementById('today-date').textContent = new Date().toLocaleDateString('ko-KR', {year:'numeric', month:'long', day:'numeric', weekday:'short'});
+
+// ── TICKER ──────────────────────────────────────────────
+const FALLBACK = [
+  { name:'코스피',     price:'2,541',   change:'+0.82%', up:true },
+  { name:'코스닥',     price:'747',     change:'-0.41%', up:false },
+  { name:'삼성전자',   price:'73,400',  change:'+1.24%', up:true },
+  { name:'SK하이닉스', price:'198,500', change:'+2.13%', up:true },
+  { name:'비트코인',   price:'$--',     change:'--',     up:true },
+  { name:'이더리움',   price:'$--',     change:'--',     up:true },
+  { name:'나스닥',     price:'17,841',  change:'+0.56%', up:true },
+  { name:'엔비디아',   price:'$896',    change:'+1.94%', up:true },
+  { name:'원/달러',    price:'1,342',   change:'-0.21%', up:false },
+];
+
+function fmtNum(n, decimals=2) {
+  if (!n && n!==0) return '--';
+  return n.toLocaleString('en-US', {maximumFractionDigits: decimals});
+}
+
+function fmtChange(pct) {
+  if (!pct && pct!==0) return {text:'--', up:true};
+  const up = pct >= 0;
+  return { text: (up?'▲ ':' ▼ ') + Math.abs(pct).toFixed(2) + '%', up };
+}
+
+function buildTicker(items) {
+  const double = [...items, ...items]; // loop seamlessly
+  return double.map(d => `
+    <span class="ticker-item">
+      <span class="name">${d.name}</span>
+      <span class="price">${d.price}</span>
+      <span class="change ${d.up?'up':'down'}">${d.change}</span>
+    </span>`).join('');
+}
+
+async function loadTicker() {
+  const items = [...FALLBACK];
+
+  // 1) Crypto via CoinGecko (free, no key, CORS OK)
+  try {
+    const r = await fetch(
+      'https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum&vs_currencies=usd&include_24hr_change=true',
+      { signal: AbortSignal.timeout(5000) }
+    );
+    const d = await r.json();
+    if (d.bitcoin) {
+      items[4] = {
+        name: '비트코인',
+        price: '$' + fmtNum(d.bitcoin.usd, 0),
+        ...fmtChange(d.bitcoin.usd_24h_change)
+      };
+    }
+    if (d.ethereum) {
+      items[5] = {
+        name: '이더리움',
+        price: '$' + fmtNum(d.ethereum.usd, 0),
+        ...fmtChange(d.ethereum.usd_24h_change)
+      };
+    }
+  } catch(e) { /* fallback 유지 */ }
+
+  // 2) Yahoo Finance via allorigins proxy (KS11=코스피, KQ11=코스닥, 삼성, SKH, 나스닥, 엔비디아, USD/KRW)
+  const yTickers = [
+    { sym:'^KS11',    idx:0, name:'코스피',     fmt: v=>(v/1).toLocaleString('ko-KR',{maximumFractionDigits:2}) },
+    { sym:'^KQ11',    idx:1, name:'코스닥',     fmt: v=>(v/1).toLocaleString('ko-KR',{maximumFractionDigits:2}) },
+    { sym:'005930.KS',idx:2, name:'삼성전자',   fmt: v=>Math.round(v).toLocaleString('ko-KR') },
+    { sym:'000660.KS',idx:3, name:'SK하이닉스', fmt: v=>Math.round(v).toLocaleString('ko-KR') },
+    { sym:'^IXIC',    idx:6, name:'나스닥',     fmt: v=>fmtNum(v,2) },
+    { sym:'NVDA',     idx:7, name:'엔비디아',   fmt: v=>'$'+fmtNum(v,2) },
+    { sym:'USDKRW=X', idx:8, name:'원/달러',    fmt: v=>fmtNum(v,2) },
+  ];
+
+  await Promise.allSettled(yTickers.map(async t => {
+    try {
+      const url = `https://query1.finance.yahoo.com/v8/finance/chart/${encodeURIComponent(t.sym)}?interval=1d&range=1d`;
+      const proxy = 'https://api.allorigins.win/get?url=' + encodeURIComponent(url);
+      const r = await fetch(proxy, { signal: AbortSignal.timeout(6000) });
+      const outer = await r.json();
+      const data = JSON.parse(outer.contents);
+      const meta = data?.chart?.result?.[0]?.meta;
+      if (!meta) return;
+      const price = meta.regularMarketPrice;
+      const prev  = meta.chartPreviousClose || meta.previousClose;
+      const pct   = prev ? ((price - prev) / prev * 100) : null;
+      const ch    = fmtChange(pct);
+      items[t.idx] = { name: t.name, price: t.fmt(price), ...ch };
+    } catch(e) { /* fallback 유지 */ }
+  }));
+
+  document.getElementById('ticker').innerHTML = buildTicker(items);
+}
+
+loadTicker();
+// 3분마다 갱신
+setInterval(loadTicker, 3 * 60 * 1000);
+// ────────────────────────────────────────────────────────
+
+// ARTICLES DATA
+const articles = [
+  {
+    id: 0,
+    category: 'AI · 반도체',
+    title: 'AI 반도체 전쟁 2025: 삼성·SK하이닉스가 엔비디아를 잡을 수 있을까',
+    excerpt: 'HBM3E 양산 경쟁이 본격화되면서 국내 반도체 기업들의 글로벌 시장 장악력이 어느 때보다 커지고 있다. 그러나 소프트웨어 생태계와 패키징 기술이라는 벽은 여전히 높다.',
+    author: '김준혁',
+    date: '2025.03.04',
+    readTime: '7분',
+    lead: 'HBM(고대역폭 메모리) 시장을 둘러싼 삼성전자와 SK하이닉스의 경쟁이 2025년 들어 새로운 국면에 접어들었다. 엔비디아의 블랙웰 아키텍처를 필두로 AI 가속기 수요가 폭발적으로 증가하면서, HBM3E 공급망 확보는 국내 반도체 기업들의 최우선 과제가 됐다.',
+    body: `
+<h2>HBM 시장, 2025년에 무슨 일이 있었나</h2>
+<p>엔비디아의 H100에서 H200, 그리고 블랙웰(B100·B200) 시리즈로 이어지는 GPU 세대교체는 HBM 소비량을 기하급수적으로 늘렸다. 블랙웰 칩 하나에는 HBM3E 8스택이 들어가며, GPU 한 서버 랙을 채우면 수십 TB의 HBM이 필요하다. 공급 부족이 필연적이었다.</p>
+
+<div class="data-row">
+  <div class="data-cell"><div class="num">280%</div><div class="label">HBM 시장 성장률 (24→25)</div></div>
+  <div class="data-cell"><div class="num">53%</div><div class="label">SK하이닉스 시장 점유율</div></div>
+  <div class="data-cell"><div class="num">$42B</div><div class="label">2025 HBM 예상 시장 규모</div></div>
+</div>
+
+<p>SK하이닉스는 HBM3E 12단 제품을 2024년 4분기부터 양산하며 선두를 굳혔다. 엔비디아의 블랙웰 울트라 칩에 독점 공급 지위를 확보한 것으로 알려졌으며, 이는 회사 역사상 가장 큰 단일 공급 계약으로 평가된다.</p>
+
+<h2>삼성전자의 반격</h2>
+<p>삼성전자는 2024년 HBM3E 퀄테스트 지연이라는 뼈아픈 경험을 했다. 열 방출과 수율 문제로 엔비디아 납품이 늦어지면서, HBM 시장 점유율이 20%대로 쪼그라들었다. 그러나 2025년 1분기, 파운드리 사업부와 메모리 사업부의 협업으로 3D TSV 패키징 수율을 90% 이상으로 끌어올리는 데 성공했다는 내부 보고가 나오고 있다.</p>
+
+<blockquote>"HBM만으로는 충분하지 않다. 패키징, 전력 설계, 소프트웨어 최적화까지 전부 해야 진짜 AI 반도체 플레이어가 된다." — 업계 관계자</blockquote>
+
+<h2>넘어야 할 벽: TSMC의 패키징과 CUDA 생태계</h2>
+<p>국내 기업들이 HBM 공급을 잡더라도, 최종 AI 칩 설계와 패키징은 여전히 TSMC-엔비디아 축이 장악하고 있다. CoWoS(칩온웨이퍼온서브스트레이트) 패키징 기술에서 TSMC는 독보적이며, CUDA 기반 소프트웨어 생태계는 수천억 달러의 개발자 자산이 쌓인 요새다.</p>
+
+<div class="highlight-box">
+  <strong>KEY INSIGHT</strong>
+  국내 반도체 기업들이 AI 시대의 진정한 수혜자가 되려면 HBM 공급에서 시스템 반도체, 나아가 AI 전용 칩 설계까지 사업 영역을 확장해야 한다. 삼성의 마하-1 NPU, SK하이닉스의 PIM(Processing-in-Memory) 기술이 그 첫걸음이 될 수 있다.
+</div>
+
+<h2>전망: 2025~2027년 AI 반도체 판도</h2>
+<p>전문가들은 2025년을 기점으로 AI 반도체 시장이 '메모리 대역폭 전쟁'에서 '추론(Inference) 효율 전쟁'으로 무게중심이 이동할 것으로 본다. 학습(Training)용 대형 GPU 수요는 여전히 크지만, 엣지 디바이스와 데이터센터의 추론 워크로드가 빠르게 성장하면서 저전력 고효율 칩의 시대가 열리고 있다.</p>
+<p>이 구도에서 삼성전자의 게이트올어라운드(GAA) 공정과 SK하이닉스의 PIM 기술이 다시 주목받을 여지가 있다. AI 반도체 전쟁은 이제 막 시작됐다.</p>
+    `
+  },
+  {
+    id: 1,
+    category: '투자 · 금리',
+    title: '금리 인하 사이클 본격화, 테크주 투자 전략 다시 짜야 할 때',
+    excerpt: '연준이 2024년 9월 빅컷을 단행한 이후 금리 인하 기조가 이어지고 있다. 금리 하락기에 테크주는 어떻게 움직이고, 지금 어떤 전략이 유효할까.',
+    author: '이수진',
+    date: '2025.03.03',
+    readTime: '6분',
+    lead: '연방준비제도(Fed)가 2024년 9월 빅컷(0.5%p 인하)을 시작으로 금리 인하 사이클에 돌입했다. 2025년 현재 기준금리는 4.0~4.25% 수준으로 내려왔다. 고금리 시대에 억눌렸던 성장주, 특히 테크주에 다시 바람이 불고 있다.',
+    body: `
+<h2>왜 금리가 내리면 테크주가 오르나</h2>
+<p>성장주의 밸류에이션은 미래 현금흐름의 현재 가치(DCF)로 결정된다. 할인율이 높을수록(=금리가 높을수록) 먼 미래의 이익 가치는 줄어든다. 반대로 금리가 내리면 먼 미래에 폭발적 이익을 낼 것으로 기대되는 테크 기업들의 현재 가치가 올라간다.</p>
+
+<div class="data-row">
+  <div class="data-cell"><div class="num">4.25%</div><div class="label">현재 미국 기준금리</div></div>
+  <div class="data-cell"><div class="num">3회</div><div class="label">2025 추가 인하 전망</div></div>
+  <div class="data-cell"><div class="num">+31%</div><div class="label">나스닥 2024년 상승률</div></div>
+</div>
+
+<h2>지금 어떤 테크주에 주목해야 하나</h2>
+<p>단순히 '테크주를 산다'는 접근은 너무 단순하다. 금리 인하 초기에는 실적 성장이 확인된 빅테크(마이크로소프트, 알파벳, 메타)가 먼저 반응하고, 이후 중소형 성장주로 자금이 흘러내려오는 패턴이 반복됐다.</p>
+
+<div class="highlight-box">
+  <strong>3단계 진입 전략</strong>
+  1단계: 클라우드·AI 인프라 확보 기업 (MSFT, GOOGL, AMZN) → 이미 상승 중<br>
+  2단계: AI 응용 소프트웨어 (Salesforce, ServiceNow, Palantir)<br>
+  3단계: 반도체 장비 및 소재 (ASML, LAM Research, 원익IPS)
+</div>
+
+<h2>국내 투자자가 주의해야 할 변수</h2>
+<p>환율이 핵심 변수다. 금리 인하로 달러가 약세를 보이면 원/달러 환율이 내려가고, 달러 표시 자산을 보유한 한국 투자자는 환차손을 볼 수 있다. 미국 테크주에 직접 투자할 경우 환헤지 여부를 반드시 고려해야 한다.</p>
+<p>또한 AI 버블 논쟁도 주의 깊게 봐야 한다. 엔비디아의 PER이 30~40배를 넘나드는 상황에서, 실제 AI 수익화가 기대에 못 미칠 경우 조정이 클 수 있다. 2000년 닷컴 버블의 교훈을 잊지 말아야 한다.</p>
+
+<h2>결론: 분산과 타이밍보다 구조적 성장에 집중</h2>
+<p>금리 인하 사이클은 테크주에 우호적 환경을 만들지만, 모든 테크주가 오르는 것은 아니다. AI, 클라우드, 사이버보안처럼 구조적 성장 동력이 확실한 분야에 집중 투자하되, 포지션의 20~30%는 가치주로 분산하는 전략이 2025년 하반기까지 유효할 것으로 본다.</p>
+    `
+  },
+  {
+    id: 2,
+    category: '스타트업',
+    title: '2025년 한국 스타트업 투자 현황: 빙하기 끝나나',
+    excerpt: '2022~2023년의 투자 혹한기를 지나 2024년 하반기부터 스타트업 투자가 되살아나고 있다. 어떤 분야가 돈을 받고, 어떤 트렌드가 부상하고 있을까.',
+    author: '박태양',
+    date: '2025.03.02',
+    readTime: '5분',
+    lead: '2022년 금리 급등과 함께 찾아온 스타트업 투자 빙하기가 3년 만에 해빙 조짐을 보이고 있다. 2024년 국내 스타트업 투자 총액은 4조 2,000억 원으로 전년 대비 23% 증가했다. AI와 딥테크를 중심으로 자금이 다시 움직이고 있다.',
+    body: `
+<h2>투자 빙하기: 무슨 일이 있었나</h2>
+<p>2021년 저금리 유동성 파티 때 쏟아졌던 투자금은 2022년 6월 연준이 자이언트 스텝을 밟기 시작하면서 급격히 말랐다. 한국 스타트업 투자 총액은 2021년 7조 원에서 2023년 2조 8,000억 원으로 60% 이상 급감했다. 많은 스타트업들이 런웨이(운영 가능 기간)를 연장하기 위해 구조조정에 나섰고, 일부 유니콘들은 기업가치를 대폭 낮춘 다운라운드를 감수해야 했다.</p>
+
+<div class="data-row">
+  <div class="data-cell"><div class="num">4.2조</div><div class="label">2024년 투자 총액</div></div>
+  <div class="data-cell"><div class="num">+23%</div><div class="label">전년 대비 증가율</div></div>
+  <div class="data-cell"><div class="num">AI·딥테크</div><div class="label">최대 수혜 분야</div></div>
+</div>
+
+<h2>어떤 분야가 돈을 받고 있나</h2>
+<p>2024~2025년 투자 트렌드는 크게 세 갈래다. 첫째, AI 스타트업. LLM 기반 B2B SaaS, 의료AI, 법률AI 등 수직계열 AI 기업들이 대규모 투자를 받고 있다. 뤼튼테크놀로지스, 업스테이지, 솔트룩스 등이 대표적이다.</p>
+<p>둘째, 딥테크. 배터리 소재, 바이오, 우주 등 오랜 R&D 기간이 필요하지만 성공 시 거대한 시장을 창출하는 분야에 정부 매칭 투자가 몰리고 있다. 셋째, B2B SaaS. 기업의 디지털 전환 수요가 꾸준한 가운데, 안정적인 ARR(연간 반복 수익) 모델을 보여주는 SaaS 기업들이 다시 각광받고 있다.</p>
+
+<h2>VC 시장의 구조적 변화</h2>
+<p>빙하기를 거치며 VC 시장도 달라졌다. "그로스 at any cost(성장 우선)" 철학에서 "유닛 이코노믹스가 먼저"로 투자 기준이 바뀌었다. 투자자들은 이제 ARR, 매출총이익률, 고객 이탈률(Churn Rate)을 빙하기 이전보다 훨씬 꼼꼼히 따진다. 같은 아이디어라도 실행력과 재무 건전성이 입증된 팀만 살아남는 환경이 됐다.</p>
+
+<blockquote>"좋은 스타트업 생태계는 투자가 많은 게 아니라, 올바른 곳에 투자되는 것이다. 빙하기가 오히려 생태계를 건강하게 만들었다." — 국내 주요 VC 파트너</blockquote>
+
+<h2>전망: 2025년 하반기가 진짜 반등 시그널</h2>
+<p>대부분의 전문가들은 2025년 상반기를 '확인의 시간'으로 본다. 금리 인하 사이클이 이어지고 미국 빅테크의 AI 투자가 계속된다면, 한국 AI 스타트업 생태계에도 본격적인 훈풍이 불 것이다. 특히 삼성벤처투자, 카카오벤처스 등 대기업 CVC들의 AI 투자가 민간 VC를 자극할 것으로 보인다.</p>
+    `
+  },
+  {
+    id: 3,
+    category: '핀테크',
+    title: '토스·카카오페이가 그리는 금융의 미래, 은행은 살아남을 수 있나',
+    excerpt: '토스는 MAU 2,000만을 돌파했고 카카오페이는 오프라인 결제 시장을 공략 중이다. 전통 은행들은 이 거대한 변화에 어떻게 대응하고 있을까.',
+    author: '최미래',
+    date: '2025.03.01',
+    readTime: '6분',
+    lead: '토스의 월간 활성 사용자(MAU)가 2,000만을 넘어섰다. 한국 경제활동인구의 절반 가까이가 매달 토스를 쓴다는 뜻이다. 카카오페이는 QR 결제와 보험·투자 서비스로 금융 슈퍼앱의 지위를 굳혀가고 있다. 이 흐름 속에서 전통 은행들의 미래는 어떻게 될까.',
+    body: `
+<h2>토스가 만든 새로운 금융 경험</h2>
+<p>토스가 혁신한 것은 단순히 UI/UX가 아니다. "금융 서비스를 앱 하나에서 해결한다"는 슈퍼앱 철학이 핵심이다. 계좌 이체, 대출, 보험, 주식, 가상자산, 신용카드까지 하나의 앱에서 심리스하게 제공한다. 특히 간편 송금이 낳은 습관은 토스를 국민 금융 앱으로 만들었다.</p>
+
+<div class="data-row">
+  <div class="data-cell"><div class="num">2,000만</div><div class="label">토스 MAU</div></div>
+  <div class="data-cell"><div class="num">38조</div><div class="label">카카오페이 연간 거래액</div></div>
+  <div class="data-cell"><div class="num">↓14%</div><div class="label">시중은행 앱 사용 감소율</div></div>
+</div>
+
+<h2>카카오페이의 오프라인 공략</h2>
+<p>카카오페이는 4,500만 카카오톡 사용자를 바탕으로 이미 온라인 결제 시장을 장악했다. 이제 전략의 초점은 오프라인이다. QR코드 결제 가맹점을 200만 곳 이상으로 확대하고, NFC 기반 비접촉 결제도 도입 중이다. 중소 상공인들이 카드 단말기 없이도 결제를 받을 수 있다는 점에서 기존 VAN사·PG사의 영역을 잠식하고 있다.</p>
+
+<h2>전통 은행들의 반격: 오픈뱅킹과 API</h2>
+<p>은행들이 손 놓고 있는 건 아니다. KB국민은행의 'KB스타뱅킹', 신한은행의 '신한SOL' 등 대형 은행 앱들도 MAU 1,000만 이상을 유지하며 반격에 나서고 있다. 오픈뱅킹 인프라를 바탕으로 핀테크와 협업하거나, 자체 AI 뱅킹 서비스를 출시하는 방식이다.</p>
+
+<blockquote>"은행은 없어지지 않는다. 다만 인프라(자본, 규제 라이선스)는 유지하되, 고객 접점은 핀테크에 내줄 것이다." — 금융권 애널리스트</blockquote>
+
+<h2>앞으로 5년: 금융 슈퍼앱의 시대</h2>
+<p>금융의 미래는 '앱 전쟁'이다. 고객의 모든 금융 데이터를 가진 플랫폼이 보험료 최적화, 대출 조건 비교, 투자 자동화까지 AI로 처리해줄 것이다. 이 경쟁에서 토스와 카카오페이는 데이터와 사용자 습관이라는 강력한 무기를 갖고 있다. 전통 은행들이 규제 울타리 안에서 안주한다면, 10년 후 은행은 B2B 인프라 사업자로 전락할 수도 있다.</p>
+    `
+  },
+  {
+    id: 4,
+    category: 'IT·테크',
+    title: '클라우드 전환 2025: 국내 기업들, 이제는 "멀티클라우드"가 답이다',
+    excerpt: 'AWS, 애저, 구글 클라우드 중 하나를 선택하던 시대가 지났다. 국내 대기업들이 멀티클라우드 전략으로 전환하는 이유와 그 비용·성과를 들여다본다.',
+    author: '정현우',
+    date: '2025.02.28',
+    readTime: '5분',
+    lead: '한때 AWS 올인이 정답처럼 여겨지던 시절이 있었다. 그러나 2025년, 국내 주요 기업들은 멀티클라우드를 표준 전략으로 채택하고 있다. 규제 준수, 비용 최적화, 장애 리스크 분산이 주된 이유다.',
+    body: `
+<h2>멀티클라우드가 왜 부상했나</h2>
+<p>2023년 발생한 AWS 서울 리전 장애는 국내 기업들에게 단일 클라우드 의존의 위험성을 생생하게 보여줬다. 장애 한 번에 수백억 원의 매출 손실이 발생한 기업도 있었다. 여기에 데이터 주권 논의가 더해지면서, 국내 클라우드(KT 클라우드, 네이버 클라우드)와 글로벌 클라우드를 조합하는 하이브리드 전략이 부상했다.</p>
+
+<div class="data-row">
+  <div class="data-cell"><div class="num">68%</div><div class="label">멀티클라우드 도입 기업 비율</div></div>
+  <div class="data-cell"><div class="num">-23%</div><div class="label">멀티클라우드 전환 후 비용 절감</div></div>
+  <div class="data-cell"><div class="num">99.99%</div><div class="label">목표 SLA(가용성)</div></div>
+</div>
+
+<h2>실제로 어떻게 운영하나</h2>
+<p>가장 보편적인 패턴은 프라이머리 워크로드는 AWS 또는 애저에, 백업과 재해복구(DR)는 다른 클라우드에, 그리고 공공 관련 업무는 KT 클라우드 등 국내 클라우드에 두는 방식이다. 쿠버네티스를 활용한 컨테이너 오케스트레이션이 멀티클라우드의 기술적 접착제 역할을 한다.</p>
+
+<h2>비용 최적화가 관건</h2>
+<p>멀티클라우드의 역설은 잘못하면 비용이 더 늘어난다는 점이다. 데이터 이동(Egress) 비용, 관리 툴 비용, 인력 학습 비용이 추가로 발생한다. 핀옵스(FinOps)팀을 별도로 꾸리거나 AWS Cost Explorer, 애저 Cost Management 등 비용 가시성 도구를 적극 활용해야 한다.</p>
+
+<blockquote>"클라우드는 더 이상 인프라 팀의 전유물이 아니다. 재무, 법무, 개발 팀이 함께 클라우드 거버넌스를 만들어야 한다." — CTO 포럼 패널 발언</blockquote>
+
+<h2>AI와 클라우드의 결합이 다음 단계</h2>
+<p>2025년 클라우드 경쟁의 핵심은 AI 서비스다. AWS의 베드록, 애저의 오픈AI 서비스, 구글의 버텍스AI가 각축을 벌이고 있다. 어느 클라우드에서 AI를 돌리느냐가 기업의 AI 전략을 좌우할 수 있다. 국내 기업들도 이제 클라우드 선택 기준에 'AI 서비스 성숙도'를 필수 항목으로 넣고 있다.</p>
+    `
+  },
+  {
+    id: 5,
+    category: '투자',
+    title: '비트코인 9만 달러 시대: 기관투자자들이 움직이기 시작했다',
+    excerpt: '비트코인 현물 ETF 출시 이후 기관 자금 유입이 본격화됐다. 개인 투자자 중심이었던 암호화폐 시장이 기관화되면서 무엇이 달라지고 있나.',
+    author: '한지훈',
+    date: '2025.02.27',
+    readTime: '6분',
+    lead: '2024년 1월 미국 SEC가 비트코인 현물 ETF를 승인한 것은 암호화폐 역사의 분수령이었다. 블랙록의 IBIT ETF는 출시 12개월 만에 운용자산 500억 달러를 돌파했다. 기관 투자자들이 본격적으로 비트코인을 '자산군'으로 인식하기 시작했다.',
+    body: `
+<h2>현물 ETF가 만든 구조적 변화</h2>
+<p>현물 ETF 이전까지 기관들이 비트코인에 투자하는 방법은 제한적이었다. 그레이스케일의 GBTC 펀드는 프리미엄·디스카운트 문제가 있었고, 직접 커스터디는 규제와 보안 리스크가 따랐다. 현물 ETF는 이 장벽을 허물었다. 이제 연기금, 보험사, 헤지펀드도 주식처럼 비트코인 노출을 관리할 수 있다.</p>
+
+<div class="data-row">
+  <div class="data-cell"><div class="num">$500B</div><div class="label">비트코인 ETF 총 운용자산</div></div>
+  <div class="data-cell"><div class="num">43%</div><div class="label">기관 보유 비중 (vs. 2022년 15%)</div></div>
+  <div class="data-cell"><div class="num">$94K</div><div class="label">비트코인 현재 가격</div></div>
+</div>
+
+<h2>기관화의 명과 암</h2>
+<p>기관 자금 유입은 시장의 성숙을 의미한다. 변동성이 줄고, 가격 조작이 어려워지며, 유동성이 깊어진다. 실제로 2024~2025년 비트코인 변동성은 2021년 대비 40% 이상 감소했다는 분석이 나왔다. 그러나 기관화는 동시에 암호화폐의 '탈중앙화' 이념과 충돌한다. 소수 기관이 대량의 비트코인을 보유하면 네트워크 의사결정에 영향을 미칠 수 있다는 우려도 있다.</p>
+
+<h2>한국 투자자에게 주는 시사점</h2>
+<p>국내에서 비트코인 현물 ETF는 아직 허용되지 않았다. 금융당국이 검토 중이지만 2025년 내 출시 여부는 불확실하다. 국내 투자자들은 업비트·빗썸 등 거래소를 통해 직접 투자하거나, 미국 상장 ETF를 해외주식 계좌로 매수하는 방식을 택하고 있다.</p>
+
+<blockquote>"비트코인은 디지털 금이다. 포트폴리오의 3~5%를 배분하는 전략이 장기적으로 유효하다." — 글로벌 자산운용사 CIO</blockquote>
+
+<h2>2025년 하반기 전망</h2>
+<p>다음 비트코인 반감기(Halving)는 2024년 4월에 완료됐고, 역사적으로 반감기 후 12~18개월은 상승장 기조가 유지됐다. 2025년 말까지의 시장 전망은 낙관론이 우세하지만, 거시경제 불확실성과 미국 규제 리스크는 상존한다. 변동성이 큰 자산인 만큼 분할 매수와 분산 투자 원칙을 지키는 것이 중요하다.</p>
+    `
+  },
+  {
+    id: 6,
+    category: '경제',
+    title: '미중 반도체 전쟁과 한국: 위기인가, 기회인가',
+    excerpt: '미국의 대중 반도체 수출 규제가 강화되면서 중국 시장 의존도가 높은 한국 반도체 기업들이 갈림길에 섰다. 단기 위기 vs 장기 기회, 어떻게 읽어야 하나.',
+    author: '김준혁',
+    date: '2025.02.26',
+    readTime: '7분',
+    lead: '바이든 행정부의 대중 반도체 수출 규제는 트럼프 2기 들어 더욱 강화됐다. 첨단 반도체 장비, AI칩, 심지어 일부 레거시 반도체까지 규제 범위가 확장되고 있다. 이 지각변동 속에서 한국 반도체 산업의 좌표는 어디인가.',
+    body: `
+<h2>규제의 파급 범위</h2>
+<p>미국의 대중 반도체 규제는 크게 세 갈래로 나뉜다. 첫째, 첨단 AI칩 수출 제한(엔비디아 H100급 이상). 둘째, 반도체 제조장비 수출 통제(ASML EUV, 미국산 CVD 장비 등). 셋째, 중국 반도체 기업에 대한 투자 제한. 한국 기업들은 이 세 가지 모두에서 복잡한 이해관계를 갖고 있다.</p>
+
+<div class="data-row">
+  <div class="data-cell"><div class="num">40%</div><div class="label">삼성전자 대중 매출 비중</div></div>
+  <div class="data-cell"><div class="num">25%</div><div class="label">SK하이닉스 대중 매출 비중</div></div>
+  <div class="data-cell"><div class="num">-$12B</div><div class="label">규제 강화 시 연간 손실 추정</div></div>
+</div>
+
+<h2>단기 고통: 중국 메모리 시장</h2>
+<p>SK하이닉스의 우시 공장과 삼성전자의 시안 공장은 각각 NAND 플래시와 DRAM을 생산한다. 미국 규제는 이들 공장의 장비 업그레이드를 제한하고 있다. 결국 중국 내 생산 능력이 점점 뒤처질 수밖에 없고, 장기적으로는 철수 압력이 커질 것이다.</p>
+
+<h2>장기 기회: 공급망 재편의 수혜</h2>
+<p>그러나 반대로 보면, 미국의 규제는 한국 기업들에게 기회이기도 하다. 중국 내 반도체 생산이 막히면, 그 수요는 한국과 대만으로 이전된다. 특히 첨단 공정이 필요한 메모리와 파운드리 분야에서 삼성전자와 SK하이닉스의 글로벌 점유율이 올라갈 수 있다.</p>
+
+<blockquote>"미중 갈등은 한국 반도체 산업의 리스크이면서 동시에 가장 큰 기회다. 어떻게 포지셔닝하느냐가 향후 10년을 결정한다." — 반도체 산업 연구원</blockquote>
+
+<h2>정부의 역할: 전략적 모호성의 한계</h2>
+<p>한국 정부는 그간 미중 사이에서 '전략적 모호성'을 유지해왔다. 그러나 반도체 분야에서는 이 전략이 한계에 다다르고 있다. 미국이 요구하는 반도체 동맹(Chip 4 Alliance)과 중국 시장 유지 사이에서 명확한 선택을 해야 하는 시점이 다가오고 있다. 반도체 산업을 국가 전략 산업으로 정의하고, 명확한 외교·산업 전략을 수립해야 할 때다.</p>
+    `
+  },
+  {
+    id: 7,
+    category: 'IT·테크',
+    title: 'AI가 바꾸는 일자리 지형도: 사라지는 직업, 새로 생기는 직업',
+    excerpt: 'ChatGPT 등장 이후 2년, AI는 실제로 일자리를 빼앗고 있을까. 데이터로 보는 AI와 고용의 현주소.',
+    author: '이수진',
+    date: '2025.02.25',
+    readTime: '6분',
+    lead: '2022년 ChatGPT 출시 이후 "AI가 일자리를 빼앗는다"는 공포가 퍼졌다. 2년이 지난 지금, 실제로는 어떤 일이 벌어지고 있을까. 어떤 직업은 정말 줄어들고, 어떤 새로운 직업이 생겨나고 있을까.',
+    body: `
+<h2>실제 데이터가 보여주는 현실</h2>
+<p>맥킨지 글로벌 인스티튜트의 2025년 보고서에 따르면, 현재 AI 자동화로 가장 위협받는 직군은 단순 반복 사무 업무다. 데이터 입력, 기본 고객 응대, 표준화된 보고서 작성, 기초 법률 리서치 등이 해당된다. 반면 완전히 자동화되기 어려운 직군은 복잡한 인간 상호작용, 신체적 유연성, 창의적 판단이 필요한 분야다.</p>
+
+<div class="data-row">
+  <div class="data-cell"><div class="num">30%</div><div class="label">AI 자동화 가능 업무 비중</div></div>
+  <div class="data-cell"><div class="num">+340만</div><div class="label">AI 관련 신규 일자리 (글로벌)</div></div>
+  <div class="data-cell"><div class="num">85%</div><div class="label">2030년 새 직업 아직 미등장</div></div>
+</div>
+
+<h2>가장 타격이 큰 직군</h2>
+<p>콜센터 상담사: 챗봇과 AI 상담 솔루션으로 1차 응대의 70% 이상이 자동화됐다. 그러나 감정적 공감이 필요한 복잡 민원은 여전히 사람이 처리한다. 주니어 개발자: GitHub Copilot, Cursor 등 AI 코딩 어시스턴트가 보일러플레이트 코드를 대신 작성하면서, 초급 개발자 채용이 30% 이상 감소했다는 보고가 있다. 번역가: 딥엘(DeepL)과 GPT-4를 활용한 번역 자동화로 일반 번역 수요가 급감했다. 전문 분야(법률, 의학) 번역은 유지되고 있다.</p>
+
+<h2>새로 생겨나는 직업들</h2>
+<p>AI 프롬프트 엔지니어, AI 트레이너(AI 모델 학습 데이터 생성 및 검수), AI 감사원(알고리즘 편향성 및 윤리 검토), LLM 운영 엔지니어(MLOps), AI 제품 매니저 등 2년 전에는 없던 직무들이 구인 공고에 넘쳐나고 있다. 특히 AI와 특정 도메인 지식을 결합한 'AI+의료', 'AI+법률', 'AI+금융' 전문가 수요가 폭발적이다.</p>
+
+<blockquote>"AI가 일자리를 빼앗는 게 아니라, AI를 모르는 사람의 일자리를 빼앗는 것이다." — 실리콘밸리 스타트업 CEO</blockquote>
+
+<h2>한국 노동시장의 시사점</h2>
+<p>한국은 제조업 중심의 산업 구조와 높은 교육열을 가지고 있다. AI 시대에 한국이 경쟁력을 유지하려면, 반복 업무 자동화를 두려워하기보다 AI를 활용한 고부가가치 업무 창출 역량을 키워야 한다. 평생학습 인프라와 AI 리터러시 교육에 대한 대규모 투자가 필요한 시점이다.</p>
+    `
+  },
+  {
+    id: 8,
+    category: '경제',
+    title: '2025 부동산 vs 주식: 자산배분 전략 완전 정리',
+    excerpt: '금리 하락과 경기 회복 기대감 속에 부동산과 주식 모두 상승 기대가 있다. 어디에 얼마를 배분해야 할까.',
+    author: '박태양',
+    date: '2025.02.24',
+    readTime: '7분',
+    lead: '30대 직장인 A씨는 고민이다. 서울 외곽 소형 아파트를 살까, 아니면 그 돈으로 ETF를 살까. 이 질문은 한국 중산층이 가장 많이 하는 자산배분 질문이다. 2025년 현재, 어떤 판단이 더 합리적일까.',
+    body: `
+<h2>부동산: 2025년 어디를 봐야 하나</h2>
+<p>서울 아파트 시장은 2023년 바닥을 찍은 후 2024년 하반기부터 반등세를 보이고 있다. 특히 강남권과 마포·용산·성동 등 선호 지역은 신고가를 경신한 단지들이 나오고 있다. 핵심 변수는 금리다. 기준금리가 내려가면 주택담보대출 금리도 따라 내려가고, 구매 수요가 살아난다.</p>
+
+<div class="data-row">
+  <div class="data-cell"><div class="num">+8.3%</div><div class="label">서울 아파트 가격 상승률(24년)</div></div>
+  <div class="data-cell"><div class="num">+31%</div><div class="label">코스피 상승률(24년 나스닥)</div></div>
+  <div class="data-cell"><div class="num">3.2%</div><div class="label">서울 아파트 전세 수익률</div></div>
+</div>
+
+<h2>주식: 코스피 vs 미국 주식</h2>
+<p>솔직히 말하면, 지난 10년간 한국 주식(코스피)은 미국 주식(S&P500)의 수익률에 크게 뒤졌다. 코스피는 2015년부터 2024년까지 약 50% 상승한 반면, S&P500은 같은 기간 230% 올랐다. 이른바 '코리아 디스카운트'다. 주주환원 문화 부재, 대기업 그룹 지배구조 문제, 낮은 ROE가 원인으로 꼽힌다.</p>
+
+<p>그러나 2025년은 다를 수 있다. 밸류업 프로그램, 기업 지배구조 개선, AI 반도체 수혜로 코스피의 상대적 매력이 높아지고 있다. 삼성전자, SK하이닉스, 현대차의 글로벌 경쟁력도 여전하다.</p>
+
+<h2>포트폴리오 제안: 30대 기준</h2>
+<div class="highlight-box">
+  <strong>자산별 비중 제안 (리스크 중간 수준)</strong>
+  미국 주식 ETF (S&P500, 나스닥): 40%<br>
+  국내 부동산 (실거주 1주택): 30%<br>
+  코스피 우량주/ETF: 15%<br>
+  채권/현금성 자산: 10%<br>
+  비트코인/암호화폐: 5%
+</div>
+
+<h2>결론: 정답은 없지만 원칙은 있다</h2>
+<p>부동산과 주식은 경쟁 관계가 아니라 보완 관계다. 부동산은 레버리지 효과와 실거주 가치, 주식은 유동성과 분산 투자 장점이 있다. 중요한 건 자신의 투자 목적, 투자 기간, 리스크 수용 능력에 맞게 배분하는 것이다. 유행하는 자산에 쏠리기보다, 장기적 원칙을 지키는 투자자가 결국 이긴다.</p>
+    `
+  },
+  {
+    id: 9,
+    category: 'IT·테크',
+    title: '테슬라 vs 현대차·기아: 전기차 2라운드의 진짜 승자는',
+    excerpt: '테슬라의 성장 둔화와 현대차·기아의 약진이 맞물리면서 글로벌 전기차 시장의 판도가 바뀌고 있다. 2025년 전기차 시장을 어떻게 읽어야 하나.',
+    author: '최미래',
+    date: '2025.02.23',
+    readTime: '6분',
+    lead: '2023~2024년 전기차 시장의 가장 큰 화두는 "성장 둔화"였다. 테슬라의 글로벌 판매량이 처음으로 역성장했고, 많은 완성차 기업들이 전기차 전환 속도를 늦췄다. 그 사이 현대차·기아는 아이오닉과 EV 시리즈로 시장 점유율을 꾸준히 높여왔다.',
+    body: `
+<h2>테슬라의 성장 딜레마</h2>
+<p>테슬라는 여전히 글로벌 전기차 시장 1위다. 그러나 성장 모멘텀은 확연히 꺾였다. 2023년 글로벌 전기차 판매 180만 대 이후 2024년도 비슷한 수준에 그쳤다. 주요 시장에서 BYD, 현대차, 폭스바겐의 추격이 거세졌고, 미국 시장에서도 포드·GM의 전기차 라인업이 경쟁하고 있다.</p>
+
+<div class="data-row">
+  <div class="data-cell"><div class="num">19%</div><div class="label">테슬라 글로벌 시장 점유율</div></div>
+  <div class="data-cell"><div class="num">8.5%</div><div class="label">현대차·기아 점유율</div></div>
+  <div class="data-cell"><div class="num">$25K</div><div class="label">테슬라 보급형 목표가격</div></div>
+</div>
+
+<h2>현대차·기아의 전략적 포지셔닝</h2>
+<p>현대차의 아이오닉5, 아이오닉6, 기아의 EV6, EV9는 디자인과 주행성능에서 세계적 인정을 받고 있다. 특히 아이오닉5는 세계 올해의 차를 포함한 주요 어워드를 수상하며 프리미엄 전기차 시장에서 입지를 굳혔다. 미국 조지아 전기차 공장(HMGMA) 가동으로 현지 생산 능력도 확보했다.</p>
+
+<h2>BYD라는 변수</h2>
+<p>이 싸움에서 가장 주목해야 할 플레이어는 테슬라도 현대차도 아니라 BYD다. BYD는 2023년 테슬라를 제치고 글로벌 전기차 판매 1위에 올랐다. 저렴한 원가 구조와 중국 내수 시장의 탄탄한 기반, 동남아·유럽 시장 확장이 강점이다. 미국 시장 진입만 막혀 있을 뿐, 글로벌 경쟁력은 압도적이다.</p>
+
+<blockquote>"전기차 시장은 이제 기술 경쟁에서 원가 경쟁으로 넘어가고 있다. 배터리 비용을 누가 더 낮추느냐가 승패를 가른다." — 전기차 산업 분석가</blockquote>
+
+<h2>2025~2027년 전망</h2>
+<p>충전 인프라 확충과 배터리 가격 하락이 계속되면서 전기차 시장은 다시 성장 궤도에 오를 전망이다. 2027년에는 전 세계 신차 판매의 30% 이상이 전기차가 될 것이라는 전망이 우세하다. 이 경쟁에서 소프트웨어 역량(OTA 업데이트, 자율주행)이 제조 역량만큼 중요해지고 있다. 현대차가 보스턴 다이내믹스와의 협업을 강화하고 자율주행 소프트웨어에 투자를 확대하는 이유다.</p>
+    `
+  }
+];
+
+// RENDER CARDS
+function renderCards(filterCat) {
+  const grid = document.getElementById('article-grid');
+  const filtered = filterCat && filterCat !== '전체'
+    ? articles.filter(a => a.category.includes(filterCat))
+    : articles.slice(1);
+
+  grid.innerHTML = filtered.map((a, i) => `
+    <div class="article-card" onclick="showArticle(${a.id})">
+      <div class="number-badge">0${i+1}</div>
+      <div class="card-tag">${a.category}</div>
+      <div class="card-title">${a.title}</div>
+      <div class="card-excerpt">${a.excerpt}</div>
+      <div class="card-meta">
+        <span class="author">${a.author} 기자</span>
+        <span>${a.date}</span>
+        <span>${a.readTime} 읽기</span>
+      </div>
+    </div>
+  `).join('');
+}
+
+function showArticle(id) {
+  const a = articles[id];
+  document.getElementById('article-content').innerHTML = `
+    <div class="back-btn" onclick="showPage('home')">← 목록으로</div>
+    <div class="article-tag-bar">
+      <span class="atag">${a.category}</span>
+    </div>
+    <h1 class="article-h1">${a.title}</h1>
+    <p class="article-lead">${a.lead}</p>
+    <div class="article-meta-bar">
+      <span class="author">${a.author} 기자</span>
+      <span>${a.date}</span>
+      <span>읽는 시간 ${a.readTime}</span>
+    </div>
+    <div class="article-body">${a.body}</div>
+  `;
+  showPage('article');
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+
+function showPage(name) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById('page-' + name).classList.add('active');
+  document.getElementById('page-' + name).classList.add('fade-in');
+  if (name === 'home') window.scrollTo({top:0, behavior:'smooth'});
+}
+
+function filterCategory(cat) {
+  showPage('home');
+  document.querySelectorAll('nav a').forEach(a => a.classList.remove('active'));
+  const map = {'전체':'all','경제':'economy','IT·테크':'tech','투자':'invest','스타트업':'startup'};
+  const el = document.getElementById('nav-' + map[cat]);
+  if (el) el.classList.add('active');
+  renderCards(cat);
+}
+
+// INIT
+renderCards();
+</script>
 </body>
 </html>
